@@ -1,14 +1,15 @@
 /*
  * Npm import
  */
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 // , applyMiddleware, compose
 /*
  * Local import
  */
 // Reducer
+
 import reducer from 'src/store/reducer';
-// import ajaxMiddleware from 'src/store/ajaxMiddleware';
+import socket from 'src/store/socketMiddleware';
 
 /*
  * Code
@@ -17,13 +18,14 @@ const devTools = [];
 if (window.devToolsExtension) {
   devTools.push(window.devToolsExtension());
 }
+// applyMiddleware applique le middleware dans le parcours de l'action
+const appliedMiddleware = applyMiddleware(socket);
 
-// const appliedMiddleware = applyMiddleware(ajaxMiddleware);
-// const enhancers = compose(appliedMiddleware, ...devTools);
+// J'assemble les middlewares et les outils de dev
+const enhancers = compose(appliedMiddleware, ...devTools);
 
-// createStore
-const store = createStore(reducer, ...devTools);
-// , enhancers
+// Je transmets à mon store les middlewares / enhancers
+const store = createStore(reducer, enhancers);
 /*
  * Export
  */

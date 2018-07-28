@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Form from 'src/components/Form';
 
 // Action Creators
-import { changeInput, sendMessage } from 'src/store/reducer';
+import { changeInput, sendMessage, connectToSocket } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -39,6 +39,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onSendMessage: () => {
     dispatch(sendMessage());
+  },
+  onConnectToSocket: () => {
+    dispatch(connectToSocket());
   },
 });
 

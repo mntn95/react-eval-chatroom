@@ -23,12 +23,18 @@ class Settings extends React.Component {
     onUserSubmit: PropTypes.func.isRequired,
     enterUsername: PropTypes.bool.isRequired,
     onAddUser: PropTypes.func.isRequired,
+    cancelInput: PropTypes.func.isRequired,
   }
 
   handleSubmit = (evt) => {
     evt.preventDefault();
     const { onUserSubmit } = this.props;
     onUserSubmit();
+  }
+
+  handleCancel = () => {
+    const { cancelInput } = this.props;
+    cancelInput();
   }
 
   handleChange = (evt) => {
@@ -41,7 +47,7 @@ class Settings extends React.Component {
     const { user, enterUsername, onAddUser } = this.props;
     return (
       <div className="settings">
-        <h2 className="settings-chatroom">Chatroom</h2>
+        <h2 className="settings-chatroom">Fenetres Live Messenger</h2>
         {!enterUsername && (
           <button
             type="button"
@@ -52,6 +58,7 @@ class Settings extends React.Component {
         )}
         {enterUsername && (
         <form className="settings-form" action="" autoComplete="off" onSubmit={this.handleSubmit}>
+          <button type="button" onClick={this.handleCancel}>CROIX</button>
           <input
             className="settings-form-input"
             type="text"

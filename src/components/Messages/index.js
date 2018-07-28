@@ -19,7 +19,7 @@ const Messages = ({ messages }) => (
   <div className="messages">
     <ul className="message">
       {messages.map(message => (
-        <li key={message.id}>
+        <li key={message.id} className="message-group">
           <p className="message-user">{message.user}</p>
           <p className="message-content">{message.message}</p>
         </li>

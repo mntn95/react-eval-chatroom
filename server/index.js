@@ -36,6 +36,7 @@ io.on('connection', function(socket) {
   socket.on('send_message', function(message) {
     message.id = ++id;
     io.emit('send_message', message);
+    console.log('REPONSE DU SERV :', message);
   });
 });
 

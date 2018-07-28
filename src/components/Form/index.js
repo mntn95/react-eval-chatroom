@@ -21,8 +21,13 @@ class Form extends React.Component {
     message: PropTypes.string.isRequired,
     onInputChange: PropTypes.func.isRequired,
     onSendMessage: PropTypes.func.isRequired,
+    onConnectToSocket: PropTypes.func.isRequired,
   }
 
+  componentDidMount() {
+    const { onConnectToSocket } = this.props;
+    onConnectToSocket();
+  }
 
   handleSubmit = (evt) => {
     evt.preventDefault();

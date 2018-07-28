@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Settings from 'src/components/Settings';
 
 // Action Creators
-import { addAuteur, changeUser, addUser } from 'src/store/reducer';
+import { addAuteur, changeUser, addUser, cancelInput } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -43,6 +43,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onAddUser: () => {
     dispatch(addUser());
+  },
+  cancelInput: () => {
+    dispatch(cancelInput());
   },
 });
 

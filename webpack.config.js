@@ -120,6 +120,7 @@ module.exports = {
       '/': 'http://localhost:3000'
     }
   },
+  // target: 'node',
   plugins: [
     // Permet de prendre le index.html de src comme base pour le fichier de dist/
     new HtmlWebPackPlugin({

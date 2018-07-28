@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
  */
 import App from 'src/components/App';
 import store from 'src/store';
+import { connectToSocket } from './store/reducer';
 
 
 /**
@@ -21,4 +22,7 @@ const rootComponent = (
   </Provider>
 );
 
+
 render(rootComponent, document.getElementById('root'));
+
+// store.dispatch(connectToSocket());

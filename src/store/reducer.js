@@ -1,13 +1,9 @@
-import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
-
-
 /**
  * Initial State
  */
 const initialState = {
   messages: [],
-  user: 'anonymous',
-  status: 'none',
+  user: 'New User',
   message: '',
   enterUsername: false,
 };
@@ -16,10 +12,13 @@ const initialState = {
  * Types
  */
 const INPUT_CHANGE = 'INPUT_CHANGE';
-const AUTEUR_CHANGE = 'AUTEUR_CHANGE';
+const USER_CHANGE = 'USER_CHANGE';
 const AUTEUR_ADD = 'AUTEUR_ADD';
-const MESSAGE_ADD = 'MESSAGE_ADD';
+export const MESSAGE_SEND = 'MESSAGE_SEND';
+const MESSAGE_RECEIVED = 'MESSAGE_RECEIVED';
 const ADD_USER = 'ADD_USER';
+export const CONNECT_SOCKET = 'CONNECT_SOCKET';
+const CANCEL_INPUT = 'CANCEL_INPUT';
 
 
 /**
@@ -36,36 +35,57 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         message: action.message,
       };
-
-    case MESSAGE_ADD: {
-      const newMessEntry = {
-        id: uuidv4(),
-        user: state.user,
+    case CONNECT_SOCKET:
+      return {
+        ...state,
         message: state.message,
       };
-      // Nouveau state
+    case MESSAGE_SEND: {
+      return {
+        ...state,
+        message: state.message,
+        user: state.user,
+      };
+    }
+    case MESSAGE_RECEIVED: {
+      const newMessEntry = {
+        id: action.id,
+        user: action.user,
+        message: action.message,
+      };
       return {
         ...state,
         messages: [...state.messages, newMessEntry],
         message: '',
       };
     }
-    case AUTEUR_CHANGE:
+    case USER_CHANGE:
       return {
         ...state,
         user: action.user,
       };
-
+    // SUBMIT NOUVEAU USER
     case AUTEUR_ADD:
+      console.log('user :', state.user);
       return {
         ...state,
         user: state.user,
+        // currentUser: state.user,
         enterUsername: false,
       };
+    // CLICK SUR LE PLUS
     case ADD_USER:
       return {
         ...state,
         enterUsername: true,
+      };
+    // CLICK SUR LE CANCEL
+    case CANCEL_INPUT:
+      console.log(action.user);
+      console.log(state.user);
+      return {
+        ...state,
+        enterUsername: false,
       };
     default:
       return state;
@@ -81,11 +101,11 @@ export const changeInput = value => ({
 });
 
 export const sendMessage = () => ({
-  type: MESSAGE_ADD,
+  type: MESSAGE_SEND,
 });
 
 export const changeUser = value => ({
-  type: AUTEUR_CHANGE,
+  type: USER_CHANGE,
   user: value,
 });
 
@@ -96,6 +116,20 @@ export const addAuteur = () => ({
 export const addUser = () => ({
   type: ADD_USER,
 });
+export const receiveMessage = value => ({
+  type: MESSAGE_RECEIVED,
+  message: value.message,
+  user: value.user,
+  id: value.id,
+});
+export const connectToSocket = () => ({
+  type: CONNECT_SOCKET,
+});
+
+export const cancelInput = () => ({
+  type: CANCEL_INPUT,
+});
+
 /**
  * Selectors
  */
