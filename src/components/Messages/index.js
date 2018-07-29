@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * Local import
  */
 // Components
-
+import Nav from '../Nav';
 // Style
 import './messages.sass';
 
@@ -17,6 +17,7 @@ import './messages.sass';
  */
 const Messages = ({ messages }) => (
   <div className="messages">
+    <Nav />
     <ul className="message">
       {messages.map(message => (
         <li key={message.id} className="message-group">
