@@ -56,7 +56,7 @@ class Settings extends React.Component {
         {!enterUsername && (
           <button
             type="button"
-            className="settings-add"
+            className="settings-add settings-add-click"
             onClick={onAddUser}
           >
             <IoIosCloseEmpty className="settings-add-icon" />
@@ -64,14 +64,16 @@ class Settings extends React.Component {
         )}
         {enterUsername && (
         <form className="settings-form" action="" autoComplete="off" onSubmit={this.handleSubmit}>
-          <button type="button" onClick={this.handleCancel}> croix </button>
+          <button type="button" className="settings-add settings-add-cancel" onClick={this.handleCancel}>
+            <IoIosCloseEmpty className="settings-add-icon" />
+          </button>
           <input
             className="settings-form-input"
             type="text"
             value={user}
             onChange={this.handleChange}
           />
-          <button className="settings-form-button" type="submit">OK</button>
+          <button className="settings-add settings-add-confirm" type="submit">OK</button>
         </form>
         )}
       </div>

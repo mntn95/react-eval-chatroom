@@ -3,7 +3,7 @@
  */
 const initialState = {
   messages: [],
-  user: 'New User',
+  user: 'kéké-du-59',
   typingUser: '',
   message: '',
   enterUsername: false,
