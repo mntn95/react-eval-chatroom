@@ -3,6 +3,8 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import MdGroup from 'react-icons/lib/md/group';
+import IoIosCloseEmpty from 'react-icons/lib/io/ios-close-empty';
 
 
 /**
@@ -47,18 +49,22 @@ class Settings extends React.Component {
     const { user, enterUsername, onAddUser } = this.props;
     return (
       <div className="settings">
-        <h2 className="settings-chatroom">Fenetres Live Messenger</h2>
+        <div className="settings-group">
+          <MdGroup className="settings-logo" />
+          <h2 className="settings-title">Fenetres Live Messenger</h2>
+        </div>
         {!enterUsername && (
           <button
             type="button"
-            className="settings-button"
+            className="settings-add"
             onClick={onAddUser}
-          >+
+          >
+            <IoIosCloseEmpty className="settings-add-icon" />
           </button>
         )}
         {enterUsername && (
         <form className="settings-form" action="" autoComplete="off" onSubmit={this.handleSubmit}>
-          <button type="button" onClick={this.handleCancel}>CROIX</button>
+          <button type="button" onClick={this.handleCancel}> croix </button>
           <input
             className="settings-form-input"
             type="text"

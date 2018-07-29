@@ -4,6 +4,7 @@
 const initialState = {
   messages: [],
   user: 'New User',
+  typingUser: '',
   message: '',
   enterUsername: false,
 };
