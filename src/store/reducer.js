@@ -4,9 +4,10 @@
 const initialState = {
   messages: [],
   user: 'kéké-du-59',
-  typingUser: '',
+  previousUser: 'kéké-du-59',
   message: '',
   enterUsername: false,
+  tempUser: 'kéké-du-59',
 };
 
 /**
@@ -63,14 +64,15 @@ const reducer = (state = initialState, action = {}) => {
     case USER_CHANGE:
       return {
         ...state,
-        user: action.user,
+        tempUser: action.user,
       };
     // SUBMIT NOUVEAU USER
     case AUTEUR_ADD:
       console.log('user :', state.user);
       return {
         ...state,
-        user: state.user,
+        previousUser: state.tempUser,
+        user: state.tempUser,
         // currentUser: state.user,
         enterUsername: false,
       };
@@ -87,6 +89,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         enterUsername: false,
+        user: state.previousUser,
       };
     default:
       return state;

@@ -26,7 +26,7 @@ const socketLogger = store => next => (action) => {
         store.dispatch(receiveMessage(message));
       });
       break;
-    case MESSAGE_SEND:  {
+    case MESSAGE_SEND: {
       // ciblable plus finement
       const message = store.getState(action.message); // Je file une copie complète de mon state
       console.log('message from Message Add : ', message);

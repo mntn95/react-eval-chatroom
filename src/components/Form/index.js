@@ -22,6 +22,7 @@ class Form extends React.Component {
     onInputChange: PropTypes.func.isRequired,
     onSendMessage: PropTypes.func.isRequired,
     onConnectToSocket: PropTypes.func.isRequired,
+    user: PropTypes.string.isRequired,
   }
 
   componentDidMount() {
@@ -42,14 +43,14 @@ class Form extends React.Component {
   }
 
   render() {
-    const { message } = this.props;
+    const { message, user } = this.props;
     return (
       <div className="form">
         <form action="" autoComplete="off" onSubmit={this.handleSubmit}>
           <input
             className="form-input"
             type="text"
-            placeholder="Votre message"
+            placeholder={`${user} dit :`}
             value={message}
             onChange={this.handleChange}
           />

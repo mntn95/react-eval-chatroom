@@ -72,6 +72,7 @@ class Settings extends React.Component {
             type="text"
             value={user}
             onChange={this.handleChange}
+            autoFocus
           />
           <button className="settings-add settings-add-confirm" type="submit">OK</button>
         </form>

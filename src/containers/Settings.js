@@ -19,7 +19,7 @@ import { addAuteur, changeUser, addUser, cancelInput } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = state => ({
-  user: state.user,
+  user: state.tempUser,
   enterUsername: state.enterUsername,
 });
 

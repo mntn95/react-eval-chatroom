@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * Local import
  */
 // Components
-import Nav from '../Nav';
+import Nav from './Nav';
 // Style
 import './messages.sass';
 

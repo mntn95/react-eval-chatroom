@@ -20,6 +20,7 @@ import { changeInput, sendMessage, connectToSocket } from 'src/store/reducer';
  */
 const mapStateToProps = state => ({
   message: state.message,
+  user: state.user,
 });
 
 /* === Actions ===

@@ -8,8 +8,9 @@
   font-size: 0.9em
   &-form
     position: relative
-    bottom: 0.7em
+    bottom: 0.6em
     &-input
+      height: 100%
       font-size: 0.7em
       padding: 0.3em
       background-color: $app-bg
@@ -22,21 +23,21 @@
       background-color: #ce4e4e
       position: relative
       bottom: 0.6em
-      &:hover 
+      &:hover
         background-color: orange
+        &> .settings-add-icon
+          animation-name: rotation
+          animation-duration: .5s
+          animation-fill-mode: forwards
     &-cancel
       background-color: #ce4e4e
       position: relative
-      top: 0.1em
-
     &-confirm
       background-color: #22c13e
       position: relative
       padding: 0.4em 1.3em
-      top: 0.2em
       font-size: 0.7em
       color: white
-
     &-icon
       color: white
       font-size: 1.4em
@@ -48,5 +49,12 @@
   &-button
     border: none
     font-size: 1.0em
-    // background-color: $bg-color
     font-weight: bold
+
+@keyframes rotation 
+  0% 
+    transform: rotate(0deg)
+  
+  100% 
+    transform: rotate(45deg)
+  
