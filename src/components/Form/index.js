@@ -31,12 +31,14 @@ class Form extends React.Component {
   }
 
   handleSubmit = (evt) => {
+    // J'empeche le refresh de la page au submit
     evt.preventDefault();
     const { onSendMessage } = this.props;
     onSendMessage();
   }
 
   handleChange = (evt) => {
+    // A chaque lettre, l'input se remplit VIA le reducer
     const { onInputChange } = this.props;
     const { value } = evt.target;
     onInputChange(value);
@@ -50,7 +52,7 @@ class Form extends React.Component {
           <input
             className="form-input"
             type="text"
-            placeholder={`${user} dit :`}
+            placeholder={`${user} écrit :`}
             value={message}
             onChange={this.handleChange}
           />

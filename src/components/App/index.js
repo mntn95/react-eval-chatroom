@@ -10,6 +10,8 @@ import React from 'react';
 import Messages from 'src/containers/Messages';
 import Form from 'src/containers/Form';
 import Settings from 'src/containers/Settings';
+import Nav from 'src/components/Nav';
+
 
 // Style
 import './app.sass';
@@ -20,6 +22,7 @@ import './app.sass';
 const App = () => (
   <div id="app">
     <Settings />
+    <Nav />
     <Messages />
     <Form />
   </div>

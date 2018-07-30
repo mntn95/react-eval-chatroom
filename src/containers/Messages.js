@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Messages from 'src/components/Messages';
 
 // Action Creators
-import { doSomething } from 'src/store/reducer';
+import {} from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -18,9 +18,9 @@ import { doSomething } from 'src/store/reducer';
  *  - ownProps : les props passées au container
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   messages: state.messages,
-  user: state.user,
+  userId: state.userId,
 });
 
 /* === Actions ===
@@ -30,17 +30,11 @@ const mapStateToProps = (state, ownProps) => ({
  *  - ownProps : les props passées au container
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  doSomething: () => {
-    dispatch(doSomething());
-  },
-});
 
 // Container
 // connect(Ce dont j'ai besoin)(Qui en a besoin)
 const MessagesContainer = connect(
   mapStateToProps,
-  mapDispatchToProps,
 )(Messages);
 
 /* 2 temps

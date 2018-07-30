@@ -1,13 +1,14 @@
+import uuidv4 from 'uuid/v4';
 /**
  * Initial State
  */
 const initialState = {
   messages: [],
   user: 'kéké-du-59',
-  previousUser: 'kéké-du-59',
+  lastUser: 'kéké-du-59',
+  changingUser: 'kéké-du-59',
   message: '',
   enterUsername: false,
-  tempUser: 'kéké-du-59',
 };
 
 /**
@@ -32,64 +33,65 @@ const CANCEL_INPUT = 'CANCEL_INPUT';
  */
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    // Lorsqu'on ajoute une lettre au form de messages
     case INPUT_CHANGE:
       return {
         ...state,
         message: action.message,
       };
+    // Lorsqu'on se connecte au websocket
     case CONNECT_SOCKET:
       return {
         ...state,
-        message: state.message,
+        userId: uuidv4(),
       };
-    case MESSAGE_SEND: {
+    // Lorsqu'on submit un message
+    case MESSAGE_SEND:
       return {
         ...state,
         message: state.message,
         user: state.user,
       };
-    }
+    // Lorsqu'on reçoit un message depuis le websocket
     case MESSAGE_RECEIVED: {
-      const newMessEntry = {
+      const newMessage = {
         id: action.id,
+        userId: action.userId,
         user: action.user,
         message: action.message,
       };
       return {
         ...state,
-        messages: [...state.messages, newMessEntry],
+        messages: [...state.messages, newMessage],
         message: '',
       };
     }
+    // Lorsqu'on ajoute une lettre a l'input de changement de pseudo
     case USER_CHANGE:
       return {
         ...state,
-        tempUser: action.user,
+        changingUser: action.user,
       };
-    // SUBMIT NOUVEAU USER
+    // Lorsqu'on submit un nouveau pseudo
     case AUTEUR_ADD:
-      console.log('user :', state.user);
       return {
         ...state,
-        previousUser: state.tempUser,
-        user: state.tempUser,
-        // currentUser: state.user,
+        lastUser: state.changingUser,
+        user: state.changingUser,
         enterUsername: false,
       };
-    // CLICK SUR LE PLUS
+    // Lorsqu'on click sur le bouton pour changer de pseudo
     case ADD_USER:
       return {
         ...state,
         enterUsername: true,
       };
-    // CLICK SUR LE CANCEL
+    // Lorsqu'on click sur le bouton pour annuler la saisie de pseudo
     case CANCEL_INPUT:
-      console.log(action.user);
-      console.log(state.user);
       return {
         ...state,
         enterUsername: false,
-        user: state.previousUser,
+        user: state.lastUser,
       };
     default:
       return state;
@@ -120,11 +122,13 @@ export const addAuteur = () => ({
 export const addUser = () => ({
   type: ADD_USER,
 });
+
 export const receiveMessage = value => ({
   type: MESSAGE_RECEIVED,
   message: value.message,
   user: value.user,
   id: value.id,
+  userId: value.userId,
 });
 export const connectToSocket = () => ({
   type: CONNECT_SOCKET,

@@ -34,6 +34,7 @@ class Settings extends React.Component {
     onUserSubmit();
   }
 
+  // Au click, j'empeche la mise a jour du nom de l'user, via le reducer
   handleCancel = () => {
     const { cancelInput } = this.props;
     cancelInput();
@@ -53,6 +54,9 @@ class Settings extends React.Component {
           <MdGroup className="settings-logo" />
           <h2 className="settings-title">Fenetres Live Messenger</h2>
         </div>
+        {/* bouton animé (déguisé en bouton FERMER de windows) activant le changement du
+        * nom de l'utilisateur
+        */}
         {!enterUsername && (
           <button
             type="button"
@@ -64,6 +68,7 @@ class Settings extends React.Component {
         )}
         {enterUsername && (
         <form className="settings-form" action="" autoComplete="off" onSubmit={this.handleSubmit}>
+          {/* Bouton pour annuler la saisie */}
           <button type="button" className="settings-add settings-add-cancel" onClick={this.handleCancel}>
             <IoIosCloseEmpty className="settings-add-icon" />
           </button>
@@ -74,6 +79,7 @@ class Settings extends React.Component {
             onChange={this.handleChange}
             autoFocus
           />
+          {/* Bouton pour confirmer la saisie */}
           <button className="settings-add settings-add-confirm" type="submit">OK</button>
         </form>
         )}

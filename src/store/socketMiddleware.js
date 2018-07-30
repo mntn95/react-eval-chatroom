@@ -19,17 +19,15 @@ let socket;
 const socketLogger = store => next => (action) => {
   switch (action.type) {
     case CONNECT_SOCKET:
-      console.log('connexion au WebSocket');
       socket = window.io(); // connexion au WebSocket
+      // J'ajoute un ecouteur d'évenement, ici lorsque send_message est utilisé,
       socket.on('send_message', (message) => {
-        console.log('message from Connect Socket : ', message);
+        // je dispatch receiveMessage, pour recevoir la liste des messages
         store.dispatch(receiveMessage(message));
       });
       break;
     case MESSAGE_SEND: {
-      // ciblable plus finement
       const message = store.getState(action.message); // Je file une copie complète de mon state
-      console.log('message from Message Add : ', message);
       socket.emit('send_message', message);
     }
       break;
